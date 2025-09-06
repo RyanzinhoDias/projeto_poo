@@ -1,13 +1,14 @@
 from cadastro import Cadastro
 from random import randint
 from excecoes import ValorInvalidoError, ValorVazioError
+
 class Livros(Cadastro):
     def __init__(self, nome, genero, autor, quantidade_estocada):
         super().__init__(nome)
         self.__inscricao = self.__numero_inscricao()
-        self.__genero = genero
-        self.__autor = autor
-        self.__quantidade_estocada = quantidade_estocada
+        self.set_genero(genero)
+        self.set_autor(autor)
+        self.set_quantidade_estocada(quantidade_estocada)
 
     def __numero_inscricao(self):
         return randint(1000, 9999)

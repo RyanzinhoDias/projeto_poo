@@ -2,7 +2,7 @@ from excecoes import ValorVazioError
 
 class Cadastro:
     def __init__(self, nome):
-        self.__nome = nome
+        self.set_nome(nome)
 
     def get_nome(self):
         return self.__nome
