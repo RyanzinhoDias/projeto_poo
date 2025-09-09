@@ -32,10 +32,10 @@ def carregar_dados_iniciais(sistema):
 
 def cadastrar_usuario(sistema):
     print("\n--- Cadastro de Usuário ---")
+    nome = input("Nome do usuário: ")
+    matricula = input("Matrícula: ")
+    curso = input("Curso: ")
     try:
-        nome = input("Nome do usuário: ")
-        matricula = input("Matrícula: ")
-        curso = input("Curso: ")
         
         novo_usuario = Usuario(nome, matricula, curso)
         sistema.inserir_usuario(novo_usuario)
@@ -45,11 +45,11 @@ def cadastrar_usuario(sistema):
 
 def cadastrar_livro(sistema):
     print("\n--- Cadastro de Livro ---")
+    nome = input("Nome do livro: ")
+    genero = input("Gênero: ")
+    autor = input("Autor: ")
     try:
-        nome = input("Nome do livro: ")
-        genero = input("Gênero: ")
-        autor = input("Autor: ")
-        pare = 1
+        pare = 0
         while pare != 1:
             try:
                 quantidade = int(input("Quantidade em estoque: "))
