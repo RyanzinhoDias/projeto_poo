@@ -16,14 +16,14 @@ def exibir_menu():
 
 def carregar_dados_iniciais(sistema):
     #Apenas para os sistemas já ter dados cadastrados
+    u1 = Usuario("Ana", "202301", "Engenharia")
+    u2 = Usuario("Beto", "202302", "Computação")
+    l1 = Livros("O Senhor dos Anéis", "Fantasia", "J.R.R. Tolkien", 3)
+    l2 = Livros("1984", "Distopia", "George Orwell", 0)
     try:
-        u1 = Usuario("Ana", "202301", "Engenharia")
-        u2 = Usuario("Beto", "202302", "Computação")
         sistema.inserir_usuario(u1)
         sistema.inserir_usuario(u2)
 
-        l1 = Livros("O Senhor dos Anéis", "Fantasia", "J.R.R. Tolkien", 3)
-        l2 = Livros("1984", "Distopia", "George Orwell", 0)
         sistema.inserir_livro(l1)
         sistema.inserir_livro(l2)
         print(">>> Dados iniciais carregados com sucesso! <<<")
@@ -51,8 +51,8 @@ def cadastrar_livro(sistema):
     try:
         pare = 0
         while pare != 1:
+            quantidade = int(input("Quantidade em estoque: "))
             try:
-                quantidade = int(input("Quantidade em estoque: "))
                 pare = 1
             except ValueError:
                 print("!!! Quantidade inválida. Por favor, digite um número inteiro. !!!")
@@ -65,18 +65,18 @@ def cadastrar_livro(sistema):
 
 def realizar_emprestimo(sistema):
     print("\n--- Empréstimo de Livro ---")
+    nome_livro = input("Digite o nome do livro: ")
+    matricula_usuario = input("Digite a matrícula do usuário: ")
     try:
-        nome_livro = input("Digite o nome do livro: ")
-        matricula_usuario = input("Digite a matrícula do usuário: ")
         sistema.emprestimo(nome_livro, matricula_usuario)
     except ErroSistema as e:
         print(f"!!! Erro ao realizar empréstimo: {e} !!!")
 
 def realizar_devolucao(sistema):
     print("\n--- Devolução de Livro ---")
+    nome_livro = input("Digite o nome do livro: ")
+    matricula_usuario = input("Digite a matrícula do usuário: ")
     try:
-        nome_livro = input("Digite o nome do livro: ")
-        matricula_usuario = input("Digite a matrícula do usuário: ")
         sistema.devolucao(nome_livro, matricula_usuario)
     except ErroSistema as e:
         print(f"!!! Erro ao realizar devolução: {e} !!!")
