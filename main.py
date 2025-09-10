@@ -31,37 +31,56 @@ def carregar_dados_iniciais(sistema):
         print(f"Ocorreu um erro ao carregar dados iniciais: {e}")
 
 def cadastrar_usuario(sistema):
+    tentativa = 0
     print("\n--- Cadastro de Usuário ---")
-    nome = input("Nome do usuário: ")
-    matricula = input("Matrícula: ")
-    curso = input("Curso: ")
-    try:
-        
-        novo_usuario = Usuario(nome, matricula, curso)
-        sistema.inserir_usuario(novo_usuario)
-        print(">>> Usuário cadastrado com sucesso! <<<")
-    except ErroSistema as e:
-        print(f"!!! Erro no cadastro: {e} !!!")
-
+    while tentativa < 4:
+        try:
+            nome = input("Nome do usuário: ")
+            matricula = input("Matrícula: ")
+            curso = input("Curso: ")
+            novo_usuario = Usuario(nome, matricula, curso)
+            sistema.inserir_usuario(novo_usuario)
+            print(">>> Usuário cadastrado com sucesso! <<<")
+            tentativa = 5
+        except ErroSistema as e:
+            print(f"!!! Erro no cadastro: {e} !!!")
+        except RuntimeError as e:
+            print(f"Erro: {e}")
+        tentativa+=1
+        if tentativa < 4:
+            print(f"Você possui mais {4 - tentativa} tentativa antes de voltarmos ao menu")
+        elif tentativa == 4:
+            print("Número de tentativa excedidas, voltando a menu principal")
 def cadastrar_livro(sistema):
+    tentativa = 0
     print("\n--- Cadastro de Livro ---")
-    nome = input("Nome do livro: ")
-    genero = input("Gênero: ")
-    autor = input("Autor: ")
-    try:
-        pare = 0
-        while pare != 1:
-            quantidade = int(input("Quantidade em estoque: "))
-            try:
-                pare = 1
-            except ValueError:
-                print("!!! Quantidade inválida. Por favor, digite um número inteiro. !!!")
-        
-        novo_livro = Livros(nome, genero, autor, quantidade)
-        sistema.inserir_livro(novo_livro)
-        print(">>> Livro cadastrado com sucesso! <<<")
-    except ErroSistema as e:
-        print(f"!!! Erro no cadastro: {e} !!!")
+    while tentativa < 4:
+        try:
+            nome = input("Nome do livro: ")
+            genero = input("Gênero: ")
+            autor = input("Autor: ")
+            pare = 0
+            while pare != 1:
+                try:
+                    quantidade_str = input("Quantidade em estoque: ").strip()
+                    if not quantidade_str:
+                        print("!!!Erro: A quantidade não pode ser vazia")
+                    else:
+                        quantidade = int(quantidade_str)
+                        pare = 1
+                except ValueError:
+                    print(f"!!!Error: Valor digitado inválido. Por favor digite um número intero Erro:")
+            novo_livro = Livros(nome, genero, autor, quantidade)
+            sistema.inserir_livro(novo_livro)
+            print(">>> Livro cadastrado com sucesso! <<<")
+            tentativa = 5
+        except ErroSistema as e:
+            print(f"!!! Erro no cadastro: {e} !!!")
+        tentativa+=1
+        if tentativa < 4:
+            print(f"Você possui mais {4 - tentativa} tentativa antes de voltarmos ao menu")
+        elif tentativa == 4:
+            print("Número de tentativa excedidas, voltando ao menu principal")
 
 def realizar_emprestimo(sistema):
     print("\n--- Empréstimo de Livro ---")
