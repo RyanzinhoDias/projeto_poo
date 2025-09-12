@@ -69,7 +69,7 @@ def cadastrar_livro(sistema):
                         quantidade = int(quantidade_str)
                         pare = 1
                 except ValueError:
-                    print(f"!!!Error: Valor digitado inválido. Por favor digite um número intero Erro:")
+                    print(f"!!!Error: Valor digitado inválido. Por favor digite um número inteiro.")
             novo_livro = Livros(nome, genero, autor, quantidade)
             sistema.inserir_livro(novo_livro)
             print(">>> Livro cadastrado com sucesso! <<<")
